@@ -1,33 +1,40 @@
-# ML-Driven Tribocorrosion Monitoring for Hip Implants
+# ML-Driven Wearable Prototype for Tribocorrosion Monitoring in Hip Implants
 
-This repository documents the machine learning research phase of a wearable prototype designed to monitor the integrity of Total Hip Replacements (THR). The project focuses on detecting **tribocorrosion**—the simultaneous degradation of implants through mechanical wear and electrochemical reactions.
+This repository documents the development of a diagnostic system that uses Machine Learning to monitor the structural and chemical integrity of Total Hip Replacements (THR) in real-time.
 
-## Scientific Context
-Traditional diagnostics often fail to detect early-stage wear. This project utilizes multi-modal sensor fusion to capture:
-- **Acoustic Emission (AE):** Ultrasonic stress waves from mechanical friction.
-- **Electrochemical Potential (EC):** Voltage/current spikes indicating passive layer breakdown.
 
-> **Full System Scope:** This repo covers the ML training. Detailed hardware schematics (Raspberry Pi Zero 2 W / LM358 Op-Amp) and 3D CAD designs are available in the Complete Report.
 
-## Experimental Results & Disclaimers
-We evaluated various sensor combinations to find the most robust diagnostic signature.
+## Scientific Foundation: Tribocorrosion
+Unlike traditional monitoring, this project focuses on **Tribocorrosion**—the synergistic effect of mechanical wear and electrochemical degradation. 
+- **AE (Acoustic Emission):** Captures high-frequency vibrations from mechanical friction.
+- **EC (Electrochemical Potential):** Detects voltage spikes indicating a breach in the implant's protective passive layer.
+- **M (Material):** Categorical data representing specific implant alloy compositions.
 
-| Configuration | Features | Accuracy | Note |
+> **Note:** This repository focuses on the ML Pipeline. The complete scope, including the **Raspberry Pi Zero 2 W** integration and **LM358 Signal Conditioning**, is available in the report.
+
+## Model Performance & Verification
+We conducted a series of experiments to find the most accurate "sensor fusion" signature.
+
+| Configuration | Features | Algorithm | Accuracy |
 | :--- | :--- | :--- | :--- |
-| **Fusion** | AE + EC | **100%** | Perfect separation of failure modes in lab conditions. |
-| **Chemical** | EC Only | **99.9%** | Highly sensitive to electrochemical spikes. |
-| **Acoustic** | AE Only | **95.9%** | Robust detection of mechanical stress. |
-| **Material** | M Only | **34.6%** | Low correlation; material type is not a primary failure predictor. |
+| **Fusion Model** | AE + EC | Random Forest | **100%** |
+| **Acoustic Focus** | AE Only | Gradient Boosting | **95.9%** |
+| **Material Study** | AE + M | Random Forest | **95.7%** |
+| **Baseline** | M Only | Naive Bayes | **34.6%** |
 
-### A Note on High Accuracy (99-100%)
-The 100% accuracy achieved in the Fusion and EC models reflects the **high signal-to-noise ratio** of the sensors in a controlled laboratory environment. 
-1. **Mathematical Separability:** In this dataset, the "Healthy," "Wear," and "Failure" signatures occupy distinct, non-overlapping spaces.
-2. **Generalization:** While perfect for this setup, accuracy may vary in clinical "in-vivo" environments due to biological noise (movement, sweat, etc.).
-3. **Verified Logic:** All models utilize a "Split-then-Scale" pipeline to ensure no data leakage occurred during training.
-
+### Analysis of High Accuracy (99-100%)
+The 100% and 99.9% results achieved in the fusion models have been verified through a rigorous **Split-then-Scale** pipeline to ensure zero data leakage. 
+- **Physical Separation:** The high accuracy is due to the distinct, non-overlapping signatures of "Healthy" vs "Failure" states in a controlled lab environment.
+- **Generalization:** While perfect in lab conditions, real-world clinical use would introduce biological noise (movement artifacts), which would likely normalize these figures.
 
 
-## Installation & Usage
+
+## Tech Stack
+- **AI/ML:** Scikit-Learn, XGBoost, Pandas, NumPy.
+- **Hardware:** Raspberry Pi Zero 2 W, Arduino Nano, Piezoelectric Sensors.
+- **Electronics:** LM358 Operational Amplifier (Signal Gain: 6.5).
+
+## Getting Started
 1. Clone the repo.
 2. Install dependencies: `pip install -r requirements.txt`
-3. Run the main analysis: `jupyter notebook notebooks/01_Hybrid_Fusion_AE_EC.ipynb`
+3. Explore the main results in `notebooks/01_Fusion_Model_AE_EC.ipynb`.
