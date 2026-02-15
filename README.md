@@ -7,7 +7,7 @@ Traditional diagnostics often fail to detect early-stage wear. This project util
 - **Acoustic Emission (AE):** Ultrasonic stress waves from mechanical friction.
 - **Electrochemical Potential (EC):** Voltage/current spikes indicating passive layer breakdown.
 
-> **Full System Scope:** This repo covers the ML training. Detailed hardware schematics (Raspberry Pi Zero 2 W / LM358 Op-Amp) and 3D CAD designs are available in the [Project Report](./Team_Report-1.pdf).
+> **Full System Scope:** This repo covers the ML training. Detailed hardware schematics (Raspberry Pi Zero 2 W / LM358 Op-Amp) and 3D CAD designs are available in the Complete Report.
 
 ## Experimental Results & Disclaimers
 We evaluated various sensor combinations to find the most robust diagnostic signature.
@@ -27,7 +27,7 @@ The 100% accuracy achieved in the Fusion and EC models reflects the **high signa
 
 
 
-## 🛠️ Installation & Usage
+## Installation & Usage
 1. Clone the repo.
 2. Install dependencies: `pip install -r requirements.txt`
 3. Run the main analysis: `jupyter notebook notebooks/01_Hybrid_Fusion_AE_EC.ipynb`
